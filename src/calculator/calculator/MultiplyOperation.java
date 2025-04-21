@@ -7,3 +7,4 @@ public class MultiplyOperation implements Calculation{
         return input1 * input2;
     }
 }
+
