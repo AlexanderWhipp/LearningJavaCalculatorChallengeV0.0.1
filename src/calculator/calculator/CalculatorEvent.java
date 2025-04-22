@@ -6,25 +6,55 @@ import java.util.HashMap;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Scanner;
 
-public class CalculatorEvent {
+public class CalculatorEvent  {
 
     private Map<String, Calculation> calculations = new HashMap<>();
 
-    public CalculatorEvent(){
-        calculations.put("+", new AddOperation());
-        calculations.put("-", new SubtractOperation());
-        calculations.put("*", new MultiplyOperation());
-        calculations.put("/", new DivideOperation());
+    public CalculatorEvent() {
+        //calculations.put("+", new AddOperation().calculation();
+        //  calculations.put("-", new SubtractOperation());
+        //   calculations.put("*", new MultiplyOperation());
+        // calculations.put("/", new DivideOperation());
     }
 
-    public void performOperation(String operator, int input1, int input2) {
-        if (calculations.containsKey(operator)) {
-            Calculation calculation = calculations.get(operator);
-            int result = calculation.calculation(input1, input2);
-            System.out.println(input1 + " " + operator + " " + input2 + " = " + result);
-        } else {
-            System.out.println("Invalid operator: " + operator);
+    public void performOperation() {
+        Scanner calculatorInput = new Scanner(System.in);
+        System.out.println("Enter Calculation: ");
+        String input = calculatorInput.nextLine().replaceAll("\\s","");
+        char operator = ' ';
+        int operatorIndex =-1;
+
+        for (int i = 0; i < input.length(); i++) {
+            if ("+-*/".indexOf(input.charAt(i)) != -1) {
+                operator = input.charAt(i);
+                operatorIndex = i;
+                break;
+            }
         }
-    }
+            if (operatorIndex == -1) {
+                System.out.println("No operator Found.");
+                return;
+            }
+            try {
+                float input1 = Float.parseFloat(input.substring(0, operatorIndex));
+                float input2 = Float.parseFloat(input.substring(operatorIndex + 1));
+
+                float result = switch (operator) {
+                    case '+' -> new AddOperation().calculation(input1, input2);
+                    case '-' -> new SubtractOperation().calculation(input1, input2);
+                    case '/' -> new DivideOperation().calculation(input1, input2);
+                    case '*' -> new MultiplyOperation().calculation(input1, input2);
+                    default -> throw new IllegalStateException("Unexpected operator: " + operator);
+                };
+                System.out.println("Result: " + result);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid numbers");
+            }
+
+        }
+
+
 }

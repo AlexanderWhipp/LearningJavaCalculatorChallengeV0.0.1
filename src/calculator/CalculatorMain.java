@@ -9,7 +9,7 @@ public class CalculatorMain {
     public static void main(String[] args) {
         CalculatorEvent calculator = new CalculatorEvent();
 
-        calculator.performOperation("/",80,2);
+        calculator.performOperation();
 
 
 

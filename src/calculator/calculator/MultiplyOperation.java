@@ -2,9 +2,11 @@ package calculator.calculator;
 import calculator.Calculation;
 
 public class MultiplyOperation implements Calculation{
+    public float result;
     @Override
-    public int calculation(int input1, int input2) {
-        return input1 * input2;
+    public float calculation(float input1, float input2) {
+        result = input1 * input2;
+        return result;
     }
 }
 
