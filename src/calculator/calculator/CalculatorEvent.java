@@ -9,16 +9,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class CalculatorEvent  {
-
-    private Map<String, Calculation> calculations = new HashMap<>();
-
-    public CalculatorEvent() {
-        //calculations.put("+", new AddOperation().calculation();
-        //  calculations.put("-", new SubtractOperation());
-        //   calculations.put("*", new MultiplyOperation());
-        // calculations.put("/", new DivideOperation());
-    }
-
     public void performOperation() {
         Scanner calculatorInput = new Scanner(System.in);
         System.out.println("Enter Calculation: ");
